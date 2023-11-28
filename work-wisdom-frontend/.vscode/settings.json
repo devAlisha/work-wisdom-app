@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/37bbc65c-1d99-4cb6-a076-44eb0e34e0d2/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/work-wisdom-app",
+    "appService.deploySubpath": "."
+}
