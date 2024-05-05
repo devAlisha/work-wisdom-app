@@ -41,7 +41,7 @@ export default function Navbar() {
                   </Link>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {navigation.map((item) => (
+                      {navigation?.map((item) => (
                         <Link
                           key={item.name}
                           to={item.to}
@@ -136,11 +136,11 @@ export default function Navbar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
+              {navigation?.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                  href={item.to}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"

@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 
 export default function ExperiencesPage() {
-  const posts = useSelector((state) => state.posts.posts);
+  const posts = useSelector((state) => state?.posts?.posts);
+  const loading = useSelector((state) => state?.posts?.isLoading);
   return (
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mb-10">
       <div className="mb-10">
@@ -13,33 +14,46 @@ export default function ExperiencesPage() {
           Experiences and Proven Tips
         </p>
       </div>
-      <ul
-        role="list"
-        className="divide-y divide-gray-100 flex flex-col gap-y-5"
-      >
-        {posts && posts.map((post) => (
-          <div
-            key={post._id}
-            className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
-          >
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              <div>{post.title}</div>
-              <div className="text-slate-500 mt-2">By: {post.author.name}</div>
-              <div className="text-slate-500 text-xs text-light mt-2">
-                {new Date(post.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  hour: "numeric",
-                  minute: "numeric",
-                })}
-              </div>
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {post.content}
-            </dd>
+      <ul role="list" className="divide-y divide-gray-50 flex flex-col gap-y-5">
+        {loading ? (
+          <div>
+            <div role="status" className="animate-pulse">
+              <div className="h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
+              <div className="h-2 bg-gray-200 rounded-full   mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full  mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full   mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full   mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full  "></div>
+              <span className="sr-only">Loading...</span>
+            </div>
           </div>
-        ))}
+        ) : (
+          posts?.map((post) => (
+            <div
+              key={post._id}
+              className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+            >
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                <div>{post.title}</div>
+                <div className="text-slate-500 mt-2">
+                  By: {post.author.name}
+                </div>
+                <div className="text-slate-500 text-xs text-light mt-2">
+                  {new Date(post.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                  })}
+                </div>
+              </dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {post.content}
+              </dd>
+            </div>
+          ))
+        )}
       </ul>
     </div>
   );

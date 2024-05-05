@@ -22,9 +22,9 @@ const LandingPage = () => {
   y2="100%"
   id="illustration-01"
 >
-  <stop stop-color="#F7F7F7" offset="0%" />
-  <stop stop-color="#EAEAEA" offset="77.402%" />
-  <stop stop-color="#DADADA" offset="100%" />
+  <stop stopColor="#F7F7F7" offset="0%" />
+  <stop stopColor="#EAEAEA" offset="77.402%" />
+  <stop stopColor="#DADADA" offset="100%" />
 </linearGradient>
 
             </defs>
@@ -46,7 +46,7 @@ const LandingPage = () => {
                 data-aos="zoom-y-out"
               >
                 Welcome to {""}
-                <span class="text-transparent bg-gradient-to-r bg-clip-text from-slate-700 to-black inline-block">
+                <span className="text-transparent bg-gradient-to-r bg-clip-text from-slate-700 to-black inline-block">
                   Work Wisdom
                 </span>
               </h1>
