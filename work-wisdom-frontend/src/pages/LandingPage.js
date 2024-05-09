@@ -41,9 +41,6 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-        <div className="absolute inset-x-0 bottom-0 h-32">
-          hi
-        </div>
       </section>
     </div>
   );
