@@ -29,7 +29,7 @@ const LandingPage = () => {
                   data-aos-delay="300"
                 >
                   <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 ">
-                    <Link to="/signup">
+                    <Link to="/experiences">
                       <Button text="Read Experiences" />
                     </Link>
                     <Link to="/signup">
