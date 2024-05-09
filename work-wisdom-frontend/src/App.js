@@ -34,7 +34,7 @@ function App() {
   }, [token]);
 
   return (
-    <div className="App min-h-screen flex flex-col">
+    <div className="App min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-gray-200">
       <BrowserRouter>
         <Navbar />
         <ToastContainer
