@@ -12,6 +12,17 @@ const signupController = async (req, res, next) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ error: "Invalid email" });
+    }
+
+    if (!validator.isStrongPassword(password)) {
+      return res.status(400).json({
+        error:
+          "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character",
+      });
+    }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ error: "User already exists" });

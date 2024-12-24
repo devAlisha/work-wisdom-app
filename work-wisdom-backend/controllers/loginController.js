@@ -11,6 +11,10 @@ const loginController = async (req, res, next) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ error: "Invalid email" });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
