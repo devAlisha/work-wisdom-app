@@ -12,11 +12,11 @@ app.use(cors({ origin: config.ORIGIN }));
 
 const port = config.PORT || 8000;
 
-app.use(errorMiddleware);
-
 dbConnect();
 
 app.use(routes);
+
+app.use(errorMiddleware);
 
 app.listen(port, () => {
   console.log(`Starting Server...`);
