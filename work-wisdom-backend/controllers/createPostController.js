@@ -12,7 +12,6 @@ const createPostController = async (req, res, next) => {
     });
 
     const savedPost = await newPost.save();
-    //save the post to the user's posts array
     req.user.posts.push(savedPost._id);
     await req.user.save();
     res.json(savedPost);

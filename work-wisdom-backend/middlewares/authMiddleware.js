@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const config = require("../config/envVariables");
 
 const authenticateToken = async (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
@@ -7,7 +8,7 @@ const authenticateToken = async (req, res, next) => {
     return res.status(401).json({ error: "Unauthorized" });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY);
+    const decoded = jwt.verify(token, config.JWT_SECRET);
     const userId = decoded.userId;
     // Check if the user exists in the database
     const user = await User.findById(userId).populate("posts", "title content");

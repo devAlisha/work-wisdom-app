@@ -1,27 +1,23 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const path = require("path");
 const dbConnect = require("./config/dbConfig");
-
 const errorMiddleware = require("./middlewares/errorMiddleware");
-
 const routes = require("./routes/routes");
-
-require("dotenv").config();
+const config = require("./config/envVariables");
 
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({ origin: config.ORIGIN }));
 
-const port = process.env.PORT || 8000;
+const port = config.PORT || 8000;
+
+app.use(errorMiddleware);
 
 dbConnect();
 
 app.use(routes);
 
-app.use(errorMiddleware);
-
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}.`);
+  console.log(`Starting Server...`);
 });
