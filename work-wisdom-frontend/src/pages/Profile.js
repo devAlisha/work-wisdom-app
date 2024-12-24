@@ -1,4 +1,3 @@
-import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
 
 export default function Profile() {

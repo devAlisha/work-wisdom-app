@@ -18,7 +18,7 @@ export default function Login() {
     });
   };
 
-  const { isLoading, isError, isSuccess, message } = useSelector(
+  const { isLoading, isError, message } = useSelector(
     (state) => state.auth
   );
 
@@ -32,7 +32,11 @@ export default function Login() {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img src={logo} alt="logo" className="mx-auto h-16 w-auto hidden sm:block" />
+          <img
+            src={logo}
+            alt="logo"
+            className="mx-auto h-16 w-auto hidden sm:block"
+          />
 
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Log in to your account
@@ -54,7 +58,7 @@ export default function Login() {
               <div className="mt-2">
                 <input
                   id="email"
-                  // type="email"
+                  type="email"
                   name="email"
                   placeholder="Email"
                   onChange={handleChange}

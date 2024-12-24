@@ -24,14 +24,14 @@ function App() {
   );
   useEffect(() => {
     dispatch(getAllposts());
-  }, [isPostCreatedSuccess]);
+  }, [dispatch, isPostCreatedSuccess]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       dispatch(getUser());
     }
-  }, [token]);
+  }, [dispatch, token]);
 
   return (
     <div className="App min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-gray-200">

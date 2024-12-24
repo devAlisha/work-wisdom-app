@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import { clearPostCreatedStatus, createPost } from "../features/postSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export default function CreatePost() {
   const [formData, setFormData] = useState({
     title: "",
@@ -26,8 +25,9 @@ export default function CreatePost() {
     } catch (error) {}
   };
 
-  const { isPostCreating, isPostCreatedError, isPostCreatedSuccess } =
-    useSelector((state) => state.posts);
+  const { isPostCreating, isPostCreatedSuccess } = useSelector(
+    (state) => state.posts
+  );
 
   useEffect(() => {
     setFormData({
@@ -36,7 +36,7 @@ export default function CreatePost() {
     });
 
     dispatch(clearPostCreatedStatus());
-  }, [isPostCreatedSuccess]);
+  }, [dispatch, isPostCreatedSuccess]);
 
   return (
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mb-10">

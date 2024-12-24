@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login, signUp } from "../features/authSlice";
+import { useDispatch } from "react-redux";
+import { signUp } from "../features/authSlice";
 import Button from "../components/Button";
 import logo from "../assets/logo/logo-no-background.png";
 export default function SignUp() {
@@ -28,7 +28,11 @@ export default function SignUp() {
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mb-10">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img src={logo} alt="logo" className="mx-auto h-16 w-auto hidden sm:block" />
+          <img
+            src={logo}
+            alt="logo"
+            className="mx-auto h-16 w-auto hidden sm:block"
+          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create an account and start your journey
           </h2>

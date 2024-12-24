@@ -28,15 +28,11 @@ export const createPost = createAsyncThunk(
   "auth/createPost",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `${url}/createPost`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${thunkAPI.getState().auth.token}`,
-          },
-        }
-      );
+      const response = await axios.post(`${url}/createPost`, data, {
+        headers: {
+          Authorization: `Bearer ${thunkAPI.getState().auth.token}`,
+        },
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.error);

@@ -14,7 +14,7 @@ export default function ExperiencesPage() {
           Experiences and Proven Tips
         </p>
       </div>
-      <ul role="list" className="divide-y divide-gray-50 flex flex-col gap-y-5">
+      <div role="list" className="divide-y divide-gray-50 flex flex-col gap-y-5">
         {loading ? (
           <div>
             <div role="status" className="animate-pulse">
@@ -54,7 +54,7 @@ export default function ExperiencesPage() {
             </div>
           ))
         )}
-      </ul>
+      </div>
     </div>
   );
 }

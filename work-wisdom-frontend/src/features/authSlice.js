@@ -12,7 +12,6 @@ const initialState = {
 
 const url = process.env.REACT_APP_API_URL;
 
-
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
   try {
     const response = await axios.post(`${url}/login`, data);
@@ -26,10 +25,7 @@ export const signUp = createAsyncThunk(
   "auth/signup",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `${url}/signup`,
-        data
-      );
+      const response = await axios.post(`${url}/signup`, data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.error);
