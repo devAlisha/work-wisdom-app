@@ -1,11 +1,16 @@
-const errorMiddleware = (error, req, res) => {
-  console.error(error);
+const config = require("../config/envVariables");
 
-  if (error.statusCode && error.message) {
-    return res.status(error.statusCode).json({ message: error.message });
-  }
+const errorMiddleware = (error, req, res, next) => {
+  console.error(`[Error]: ${error.message}`, error.stack);
 
-  return res.status(500).json({ message: "Internal Server Error" });
+  const statusCode = error.statusCode || 500;
+  const message = error.message || "Internal Server Error";
+
+  res.status(statusCode).json({
+    success: false,
+    message,
+    ...(config.NODE_ENV === "development" && { stack: error.stack }), // Include stack trace in development mode
+  });
 };
 
 module.exports = errorMiddleware;

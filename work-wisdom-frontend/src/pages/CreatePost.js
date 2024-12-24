@@ -3,26 +3,28 @@ import Button from "../components/Button";
 import { clearPostCreatedStatus, createPost } from "../features/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+
 export default function CreatePost() {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
   });
 
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createPost(formData));
-    toast.success("Created Post Successfully!");
     try {
-    } catch (error) {}
+      await dispatch(createPost(formData));
+      toast.success("Created Post Successfully!");
+    } catch (error) {
+      toast.error("Failed to create post.");
+    }
   };
 
   const { isPostCreating, isPostCreatedSuccess } = useSelector(
@@ -30,19 +32,17 @@ export default function CreatePost() {
   );
 
   useEffect(() => {
-    setFormData({
-      title: "",
-      content: "",
-    });
-
-    dispatch(clearPostCreatedStatus());
+    if (isPostCreatedSuccess) {
+      setFormData({ title: "", content: "" });
+      dispatch(clearPostCreatedStatus());
+    }
   }, [dispatch, isPostCreatedSuccess]);
 
   return (
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mb-10">
       <form onSubmit={handleSubmit}>
         <div className="space-y-12">
-          <div className="">
+          <div>
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Share Your Interview Experience
             </h2>
@@ -59,18 +59,16 @@ export default function CreatePost() {
                   Title
                 </label>
                 <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
-                    <input
-                      value={formData.title}
-                      type="text"
-                      name="title"
-                      id="title"
-                      autoComplete="title"
-                      className="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Write a title for your post"
-                      onChange={handleChange}
-                    />
-                  </div>
+                  <input
+                    value={formData.title}
+                    type="text"
+                    name="title"
+                    id="title"
+                    placeholder="Write a title for your post"
+                    onChange={handleChange}
+                    required
+                    className="block border border-1 w-full px-3 py-2 text-gray-900 bg-gray-50 rounded-md focus:ring-2 focus:ring-gray-500"
+                  />
                 </div>
               </div>
 
@@ -89,7 +87,8 @@ export default function CreatePost() {
                     rows={6}
                     placeholder="Enter your content here"
                     onChange={handleChange}
-                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                    required
+                    className="block border border-1 w-full px-3 py-2 text-gray-900 bg-gray-50 rounded-md focus:ring-2 focus:ring-gray-500"
                   />
                 </div>
               </div>
@@ -101,11 +100,12 @@ export default function CreatePost() {
           <Button
             disabled={isPostCreating}
             type="submit"
-            text={`${isPostCreating ? "Creating" : "Save"}`}
+            text={isPostCreating ? "Creating" : "Save"}
           />
           <button
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900"
+            onClick={() => setFormData({ title: "", content: "" })}
           >
             Cancel
           </button>
